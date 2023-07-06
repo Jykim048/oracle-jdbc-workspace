@@ -10,6 +10,23 @@ public class Member {
 	private String memberName;
 	private char status;
 	private Date enrollDate;
+	
+	public Member(int memberNo) {
+		this.memberNo = memberNo;
+		
+		
+	}
+	public Member(int memberNo, String memberId, String memberPwd, String memberName, char status, Date enrollDate) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberName = memberName;
+		this.status = status;
+		this.enrollDate = enrollDate;
+	}
+
+	
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -45,6 +62,11 @@ public class Member {
 	}
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
+	}
+	@Override
+	public String toString() {
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
+				+ memberName + ", status=" + status + ", enrollDate=" + enrollDate + "]";
 	}
 	
 	

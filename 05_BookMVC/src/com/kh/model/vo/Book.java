@@ -11,6 +11,14 @@ public class Book {
 		
 		
 	}
+	public Book( String string, String string2) {
+	}
+	public Book(int no) {
+	}
+	@Override
+	public String toString() {
+		return "Book [bkNo=" + bkNo + ", bkTitle=" + bkTitle + ", bkAuthor=" + bkAuthor + "]";
+	}
 	public int getBkNo() {
 		return bkNo;
 	}
