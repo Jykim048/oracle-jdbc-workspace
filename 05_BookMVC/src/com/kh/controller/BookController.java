@@ -68,16 +68,29 @@ public class BookController {
 	}
 
 	public boolean rentBook(int no) {
-		if(dao.rentBook(new Rent(new Member(member.getMemberNo()), new Book(no)))==1) return true;
+		try {
+			if(dao.rentBook(new Rent(new Member(member.getMemberNo()), new Book(no)))==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 		
 	}
 	public boolean deleteRent(int no) {
-		if(dao.deleteRent(no)==1) return true;
+		try {
+			if(dao.deleteRent(no)==1) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public ArrayList<Rent> printRentBook() {
-		return dao.printRentBook(member.getMemberId());
+		try {
+			return dao.printRentBook(member.getMemberId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

@@ -18,24 +18,21 @@ import com.kh.model.vo.Rent;
 import config.ServerInfo;
 
 public class BookDAO implements BookDAOTemplate {
-	
+
 	private Properties p = new Properties();
 	
 	public BookDAO() {
 		try {
 			p.load(new FileInputStream("src/config/jdbc.properties"));
-			try {
-				Class.forName(ServerInfo.DRIVER_NAME);
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			Class.forName(ServerInfo.DRIVER_NAME);
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	@Override
 	public Connection getConnect() throws SQLException {
 		return DriverManager.getConnection(ServerInfo.URL, ServerInfo.USER, ServerInfo.PASSWORD);
@@ -61,8 +58,7 @@ public class BookDAO implements BookDAOTemplate {
 		
 		ArrayList<Book> bookList = new ArrayList<>();
 		while(rs.next()) {
-			bookList.add(new Book(rs.getInt("bk_no"), rs.getString("bk_title"), rs.getString("bk.author")));
-		
+			bookList.add(new Book(rs.getInt("bk_no"), rs.getString("bk_title"), rs.getString("bk_author")));
 		}
 		closeAll(rs, st, conn);
 		return bookList;
@@ -78,7 +74,6 @@ public class BookDAO implements BookDAOTemplate {
 		int result = st.executeUpdate();
 		closeAll(st, conn);
 		return result;
-		
 	}
 
 	@Override
@@ -99,10 +94,10 @@ public class BookDAO implements BookDAOTemplate {
 		st.setString(1, member.getMemberId());
 		st.setString(2, member.getMemberPwd());
 		st.setString(3, member.getMemberName());
+		
 		int result = st.executeUpdate();
 		closeAll(st, conn);
 		return result;
-		
 	}
 
 	@Override
@@ -128,15 +123,15 @@ public class BookDAO implements BookDAOTemplate {
 		closeAll(rs, st, conn);
 		
 		return member;
-	
 	}
+
 	@Override
 	public int deleteMember(String id, String password) throws SQLException {
 		Connection conn = getConnect();
 		PreparedStatement st = conn.prepareStatement(p.getProperty("deleteMember"));
 		st.setString(1, id);
 		st.setString(2, password);
-		
+
 		int result = st.executeUpdate();
 		closeAll(st, conn);
 		return result;
@@ -147,8 +142,8 @@ public class BookDAO implements BookDAOTemplate {
 		Connection conn = getConnect();
 		PreparedStatement st = conn.prepareStatement(p.getProperty("rentBook"));
 		st.setInt(1, rent.getMember().getMemberNo());
-		st.setInt(2, rent.getbook().getBkNo());
-		
+		st.setInt(2, rent.getBook().getBkNo());
+
 		int result = st.executeUpdate();
 		closeAll(st, conn);
 		return result;
@@ -159,7 +154,7 @@ public class BookDAO implements BookDAOTemplate {
 		Connection conn = getConnect();
 		PreparedStatement st = conn.prepareStatement(p.getProperty("deleteRent"));
 		st.setInt(1, no);
-		
+
 		int result = st.executeUpdate();
 		closeAll(st, conn);
 		return result;
@@ -181,7 +176,7 @@ public class BookDAO implements BookDAOTemplate {
 		}
 		closeAll(rs, st, conn);
 		return rentList;
-		
 	}
 
 }
+
