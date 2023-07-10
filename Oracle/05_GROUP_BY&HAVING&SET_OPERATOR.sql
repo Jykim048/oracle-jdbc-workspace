@@ -38,6 +38,7 @@
      6: ORDER BY   컬럼명 | 별칭 | 컬럼순번 [ASC|DESC] [NULLS FIRST|NULLS LAST]
 */   
 
+
 -- 부서별 평균 급여가 300만원 이상인 직원의 평균 급여를 조회 (부서코드, 평균급여)
 SELECT DEPT_CODE, FLOOR(AVG(NVL(SALARY,0)))
 FROM EMPLOYEE
